@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- شاشة التحميل -->
     <div id="loader">
         <div class="spinner-box">
             <div class="circle-border"><div class="circle-core"></div></div>
@@ -16,6 +17,7 @@
         </div>
     </div>
 
+    <!-- شريط التنقل العلوي -->
     <nav class="navbar">
         <div class="logo">Mhamad <span>Adil</span></div>
         <ul class="nav-links">
@@ -32,23 +34,25 @@
         </ul>
     </nav>
 
+    <!-- نموذج تسجيل الدخول -->
     <main>
         <section class="section-container">
             <h2 class="section-title"><i class="fa-solid fa-user-shield"></i> تسجيل الدخول</h2>
             <form id="login-form" class="glass-card">
                 <div class="form-group">
-                    <label for="login-username">اسم المستخدم / البريد</label>
+                    <label for="login-username"><i class="fa-solid fa-user"></i> اسم المستخدم / البريد</label>
                     <input type="text" id="login-username" placeholder="أدخل بياناتك" required>
                 </div>
                 <div class="form-group">
-                    <label for="login-password">كلمة المرور</label>
+                    <label for="login-password"><i class="fa-solid fa-key"></i> كلمة المرور</label>
                     <input type="password" id="login-password" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="btn-submit">دخول</button>
+                <button type="submit" class="btn-submit">دخول <i class="fa-solid fa-right-to-bracket"></i></button>
             </form>
         </section>
     </main>
 
+    <!-- الفوتر -->
     <footer>
         <div class="footer-content">
             <a href="index.html" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> العودة للرئيسية</a>
@@ -56,6 +60,7 @@
             <p class="copyright">© 2026 جميع الحقوق محفوظة | تم تطوير الموقع من قبل <strong>Mhamad Adil</strong></p>
         </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

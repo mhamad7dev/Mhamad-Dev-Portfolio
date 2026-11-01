@@ -1,304 +1,139 @@
-const loader = document.getElementById("loader");
-if (loader) {
-  setTimeout(() => {
-    loader.style.opacity = "0";
-    setTimeout(() => {
-      loader.style.display = "none";
-    }, 400);
-  }, 300);
-}
+/* ==========================================
+   JavaScript - Mhamad Adil Portfolio
+   ========================================== */
+window.addEventListener('load', () => {
+    const loader = document.getElementById("loader");
+    if (loader) {
+        loader.classList.add("is-hidden");
+        setTimeout(() => {
+            loader.remove(); 
+        }, 500);
+    }
+});
+setTimeout(() => {
+    const loader = document.getElementById("loader");
+    if (loader) {
+        loader.remove();
+    }
+}, 2000);
 
 document.addEventListener("DOMContentLoaded", () => {
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeIcon = themeToggle ? themeToggle.querySelector("i") : null;
 
-  const themeToggleBtn = document.getElementById("theme-toggle");
-  const currentTheme = localStorage.getItem("bo3dil_theme") || "dark";
-
-  if (currentTheme === "light") {
+  const savedTheme = localStorage.getItem("mhamad-theme");
+  if (savedTheme === "light") {
     document.body.classList.add("light-mode");
-    if (themeToggleBtn) {
-      themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-    }
   }
 
-  themeToggleBtn?.addEventListener("click", () => {
-    document.body.classList.toggle("light-mode");
+  const updateThemeIcon = () => {
+    if (!themeIcon) return;
     const isLight = document.body.classList.contains("light-mode");
-    
-    if (isLight) {
-      localStorage.setItem("bo3dil_theme", "light");
-      themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-    } else {
-      localStorage.setItem("bo3dil_theme", "dark");
-      themeToggleBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+    themeIcon.classList.toggle("fa-sun", isLight);
+    themeIcon.classList.toggle("fa-moon", !isLight);
+    if (themeToggle) {
+      themeToggle.setAttribute("aria-label", isLight ? "تفعيل المظهر الداكن" : "تفعيل المظهر الفاتح");
+      themeToggle.title = isLight ? "تفعيل المظهر الداكن" : "تفعيل المظهر الفاتح";
     }
+  };
+
+  updateThemeIcon();
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      const theme = document.body.classList.contains("light-mode") ? "light" : "dark";
+      try {
+        localStorage.setItem("mhamad-theme", theme);
+      } catch (error) {}
+      updateThemeIcon();
+    });
+  }
+
+  document.querySelectorAll(".back-to-top").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const target = link.getAttribute("href");
+      if (target === "#top" || target === "#") {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
   });
 
-  let projects = [];
-  try {
-    projects = JSON.parse(localStorage.getItem("bo3dil_projects")) || [];
-  } catch (e) {
-    projects = [];
-  }
+  document.querySelectorAll(".hero-profile-pic").forEach((image) => {
+    image.addEventListener("error", () => {
+      console.warn("صورة الملف الشخصي غير موجودة.");
+      image.classList.add("image-not-found");
+    }, { once: true });
+  });
 
-  const projectForm = document.getElementById("project-form");
-  const projectsGrid = document.getElementById("projects-grid");
-  const statCount = document.getElementById("stat-count");
-
-  function saveAndRender() {
-    localStorage.setItem("bo3dil_projects", JSON.stringify(projects));
-    renderProjects();
-  }
-
-  function renderProjects() {
-    if (statCount) statCount.textContent = projects.length;
-    if (!projectsGrid) return;
-    projectsGrid.innerHTML = "";
-
-    if (projects.length === 0) {
-      projectsGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 20px;">لا يوجد مشاريع حالياً. أضف مشروعك الأول من النموذج أعلاه!</p>`;
-      return;
-    }
-
-    projects.forEach((proj, index) => {
-      const card = document.createElement("div");
-      card.className = "glass-card project-card";
-      
-      const hasCode = proj.code && proj.code.trim() !== "";
-
-      card.innerHTML = `
-        <img src="${proj.image}" class="project-img" alt="${proj.title}">
-        <h3 class="project-title">${proj.title}</h3>
-        <p class="project-desc">${proj.desc}</p>
+  const checkAdminAuth = () => {
+    const token = localStorage.getItem('adminToken');
+    const loginFormContainer = document.getElementById('login-form'); 
+    
+    if (token) {
+      if (loginFormContainer) {
+        loginFormContainer.innerHTML = `
+          <div class="admin-welcome-box" style="text-align: center; padding: 20px;">
+            <h3>أهلاً بك يا أدمن 🚀</h3>
+            <p style="color: #4ade80; margin: 10px 0;">لديك صلاحيات كاملة لتعديل الملف الشخصي.</p>
+            <button id="logout-btn" class="btn-submit" style="background-color: #ef4444; margin-top: 10px; cursor: pointer;">
+              تسجيل الخروج <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
+          </div>
+        `;
         
-        <div class="project-actions">
-          <button class="action-btn" onclick="likeProject(${index})"><i class="fa-solid fa-thumbs-up"></i> ${proj.likes || 0}</button>
-          <button class="action-btn" onclick="dislikeProject(${index})"><i class="fa-solid fa-thumbs-down"></i> ${proj.dislikes || 0}</button>
-          ${hasCode ? `<button class="action-btn" onclick="viewCode(${index})"><i class="fa-solid fa-code"></i> الكود</button>` : ''}
-          <button class="action-btn" onclick="shareProject('${proj.title}')"><i class="fa-solid fa-share-nodes"></i> نشر</button>
-          <button class="action-btn delete-btn" onclick="deleteProject(${index})"><i class="fa-solid fa-trash"></i> حذف</button>
-        </div>
-
-        <div class="comments-container">
-          <div class="comments-list">
-            ${(proj.comments || []).map(c => `<div class="comment-item">${c}</div>`).join("")}
-          </div>
-          <div style="display:flex; gap:8px; margin-top: 8px;">
-            <input type="text" id="comment-input-${index}" placeholder="اكتب تعليقاً..." style="flex:1; padding:8px 12px; font-size: 0.85rem;">
-            <button class="action-btn" onclick="addComment(${index})">تعليق</button>
-          </div>
-        </div>
-      `;
-      projectsGrid.appendChild(card);
-    });
-  }
-
-  projectForm?.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    if (projects.length >= 50) {
-      alert("عذراً، الحد الأقصى للمشاريع المسموح باستضافتها هو 50 مشاريع فقط.");
-      return;
-    }
-
-    const titleInput = document.getElementById("project-title");
-    const descInput = document.getElementById("project-desc");
-    const codeInput = document.getElementById("project-code");
-    const imgInput = document.getElementById("project-image");
-
-    if (!titleInput || !descInput || !imgInput) return;
-
-    const title = titleInput.value;
-    const desc = descInput.value;
-    const code = codeInput ? codeInput.value : "";
-    
-    if (!imgInput.files || imgInput.files.length === 0) {
-      alert("يرجى اختيار صورة للمشروع!");
-      return;
-    }
-
-    const imgFile = imgInput.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function (event) {
-      const newProject = {
-        title,
-        desc,
-        code,
-        image: event.target.result,
-        likes: 0,
-        dislikes: 0,
-        comments: []
-      };
-      projects.unshift(newProject);
-      saveAndRender();
-      projectForm.reset();
-      alert("تم نشر المشروع بنجاح! 🚀");
-    };
-    reader.readAsDataURL(imgFile);
-  });
-
-  window.likeProject = (index) => {
-    projects[index].likes = (projects[index].likes || 0) + 1;
-    saveAndRender();
-  };
-
-  window.dislikeProject = (index) => {
-    projects[index].dislikes = (projects[index].dislikes || 0) + 1;
-    saveAndRender();
-  };
-
-  window.deleteProject = (index) => {
-    if (confirm("هل أنت متأكد من رغبتك في حذف هذا المشروع؟")) {
-      projects.splice(index, 1);
-      saveAndRender();
-    }
-  };
-
-  window.addComment = (index) => {
-    const input = document.getElementById(`comment-input-${index}`);
-    if (input && input.value.trim() !== "") {
-      if (!projects[index].comments) projects[index].comments = [];
-      projects[index].comments.push(input.value.trim());
-      saveAndRender();
-    }
-  };
-
-  window.shareProject = (title) => {
-    navigator.clipboard.writeText(window.location.href);
-    alert(`تم نسخ رابط الموقع لمشاركة مشروع "${title}"!`);
-  };
-
-  const codeModal = document.getElementById("code-modal");
-  const modalCodeEditor = document.getElementById("modal-code-editor");
-  const saveCodeBtn = document.getElementById("save-code-btn");
-  const closeCodeModalBtn = document.querySelector(".close-code-modal");
-  let currentEditIndex = null;
-
-  if (codeModal && modalCodeEditor && saveCodeBtn) {
-    window.viewCode = (index) => {
-      currentEditIndex = index;
-      modalCodeEditor.value = projects[index].code || "";
-      codeModal.style.display = "flex";
-    };
-
-    saveCodeBtn.addEventListener("click", () => {
-      if (currentEditIndex !== null) {
-        projects[currentEditIndex].code = modalCodeEditor.value;
-        saveAndRender();
-        codeModal.style.display = "none";
-      }
-    });
-
-    if (closeCodeModalBtn) {
-      closeCodeModalBtn.onclick = () => codeModal.style.display = "none";
-    }
-    
-    window.onclick = (event) => {
-      if (event.target === codeModal) {
-        codeModal.style.display = "none";
-      }
-    };
-  }
-
-  const loginForm = document.getElementById("login-form");
-  const avatarEditLabel = document.getElementById("avatar-edit-label");
-  const loginNavBtn = document.querySelector(".login-btn");
-
-  let isAdminLoggedIn = localStorage.getItem("bo3dil_is_admin") === "true";
-
-  function updateAdminUI() {
-    if (avatarEditLabel) {
-      avatarEditLabel.style.display = isAdminLoggedIn ? "flex" : "none";
-    }
-    if (!loginNavBtn) return;
-
-    if (isAdminLoggedIn) {
-      loginNavBtn.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج`;
-    } else {
-      loginNavBtn.innerHTML = `<i class="fa-solid fa-user-lock"></i> تسجيل الدخول`;
-    }
-  }
-
-  updateAdminUI();
-
-  loginForm?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    
-    const usernameInput = loginForm.querySelector("input[type='text']");
-    const passwordInput = loginForm.querySelector("input[type='password']");
-
-    if (!usernameInput || !passwordInput) return;
-
-    const email = usernameInput.value;
-    const password = passwordInput.value;
-
-    try {
-      
-      const response = await fetch('http://localhost:3000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        isAdminLoggedIn = true;
-        localStorage.setItem("bo3dil_is_admin", "true");
-        updateAdminUI();
-        loginForm.reset();
-        alert("أهلاً بك يا معلم Bo3Dil! تم تفعيل صلاحيات التعديل.");
-        window.location.href = "index.html";
-      } else {
-
-        alert(data.message || "بيانات الدخول غير صحيحة!");
-      }
-    } catch (error) {
-      console.error("خطأ في الاتصال بالسيرفر:", error);
-      alert("تعذر الاتصال بالسيرفر! تأكد أن سيرفر Node.js شغال.");
-    }
-  });
-
-  if (loginNavBtn) {
-    loginNavBtn.addEventListener("click", (e) => {
-      if (isAdminLoggedIn) {
-        e.preventDefault();
-        if (confirm("هل تريد تسجيل الخروج؟")) {
-          isAdminLoggedIn = false;
-          localStorage.setItem("bo3dil_is_admin", "false");
-          updateAdminUI();
-          alert("تم تسجيل الخروج بنجاح.");
-          window.location.reload();
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) {
+          logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('adminToken');
+            alert("تم تسجيل الخروج بنجاح.");
+            window.location.reload();
+          });
         }
       }
-    });
-  }
-
-  const avatarUpload = document.getElementById("avatar-upload");
-  const userAvatar = document.getElementById("user-avatar");
-
-  const savedAvatar = localStorage.getItem("bo3dil_avatar");
-  if (savedAvatar && userAvatar) userAvatar.src = savedAvatar;
-
-  avatarUpload?.addEventListener("change", (e) => {
-    if (!isAdminLoggedIn) {
-      alert("عذراً، لا تملك الصلاحية لتغيير صورة البروفايل!");
-      return;
+      document.querySelectorAll('.admin-only-edit').forEach(el => {
+        el.style.display = 'block'; 
+      });
     }
+  };
 
-    const file = e.target.files[0];
-    if (file && userAvatar) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        userAvatar.src = event.target.result;
-        localStorage.setItem("bo3dil_avatar", event.target.result);
-        alert("تم تحديث الصورة الشخصية بنجاح!");
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-
-  renderProjects();
+  checkAdminAuth();
 });
+
+const loginForm = document.getElementById('login-form');
+if (loginForm) {
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault(); 
+
+        const emailInput = document.getElementById('login-username').value;
+        const passwordInput = document.getElementById('login-password').value;
+
+        try {
+            const response = await fetch('http://localhost:3002/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: emailInput,
+                    password: passwordInput
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log("تم تسجيل الدخول بنجاح:", data.message);
+                localStorage.setItem('adminToken', data.token);
+                alert("أهلاً بك يا أدمن، تم تسجيل الدخول بنجاح! 🚀");
+                window.location.reload();
+            } else {
+                alert(data.message || "فشل تسجيل الدخول، تأكد من البيانات.");
+            }
+        } catch (error) {
+            console.error("مشكلة في الاتصال:", error);
+            alert("تعذر الاتصال بالسيرفر، تأكد أنه شغال على البورت 3002!");
+        }
+    });
+}

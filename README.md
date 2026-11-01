@@ -16,15 +16,13 @@
 
 - ### 💻 طريقة تشغيل السيرفر محلياً
 
-1. تأكد من تثبيت Node.js على جهازك.
-2. انتقل إلى مجلد السيرفر:
+1. تأكد من تثبيت Node.js.
+2. من مجلد المشروع شغّل:
    ```bash
    cd server
-ثيت المكتبات اللازمة:
-    npm install
-
-شغل السيرفر:
-    node server.js 
+   npm install
+   npm start
+   ```
+3. افتح الموقع باستخدام Live Server أو Live Preview. واجهة الموقع قد تستخدم البورت 3000 أو 5500، أما API تسجيل الدخول فيعمل على البورت 3002.
 
 - **مستودع السيرفر (Backend Repository):** [Secure-Portfolio](https://github.com/m73del/Secure-Portfolio.git)
--

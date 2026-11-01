@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- شاشة التحميل (مهمة لـ script.js) -->
     <div id="loader">
         <div class="spinner-box">
             <div class="circle-border"><div class="circle-core"></div></div>
@@ -16,6 +17,7 @@
         </div>
     </div>
 
+    <!-- النافبار -->
     <nav class="navbar">
         <div class="logo">Mhamad <span>Adil</span></div>
         <ul class="nav-links">
@@ -32,27 +34,72 @@
         </ul>
     </nav>
 
-    <main>
+    <!-- قسم التواصل الرئيسي -->
+    <main class="contact-page-wrapper">
         <section class="section-container">
-            <h2 class="section-title">التواصل معي</h2>
-            <form id="contact-form" class="glass-card">
-                <div class="form-group">
-                    <label for="contact-name">الاسم الكريم الكامل</label>
-                    <input type="text" id="contact-name" placeholder="اكتب اسمك الكامل" required>
+            <div class="section-header">
+                <span class="sub-badge">GET IN TOUCH</span>
+                <h2 class="section-title">تواصل معي</h2>
+                <p class="section-desc">هل لديك فكرة مشروع، استفسار، أو ملاحظات على الموقع؟ يسعدني دائماً تواصلك!</p>
+            </div>
+
+            <!-- شبكة التواصل (النموذج والصورة) -->
+            <div class="contact-grid">
+                <!-- نموذج إرسال الرسالة -->
+                <div class="contact-form-container">
+                    <form id="contact-form" class="glass-card">
+                        <div class="form-group">
+                            <label for="contact-name">الاسم الكريم الكامل *</label>
+                            <input type="text" id="contact-name" placeholder="اكتب اسمك الكامل" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">البريد الإلكتروني *</label>
+                            <input type="email" id="contact-email" placeholder="example@gmail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">الملاحظات أو الاستفسار *</label>
+                            <textarea id="contact-message" rows="5" placeholder="قل لنا عن ملاحظاتك حول الموقع أو عن أي شيء حابب تستفسر عنه..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            إرسال الرسالة <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="contact-email">البريد الإلكتروني</label>
-                    <input type="email" id="contact-email" placeholder="example@gmail.com" required>
+
+                <!-- الجانب البصري (صورتك الشخصية الفخمة) -->
+                <div class="contact-visual-side">
+                    <div class="contact-img-wrapper">
+                        <div class="visual-glow"></div>
+                        <img src="Mhamad_Dev photo.jpeg" alt="Mhamad Adil" class="contact-pic">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="contact-message">قلنا عن ملاحظاتك حول الموقع او عن اي شي حابب تستفسر عنو</label>
-                    <textarea id="contact-message" rows="4" placeholder="اكتب رسالتك هنا..." required></textarea>
+            </div>
+
+            <!-- كروت معلومات التواصل السريعة -->
+            <div class="contact-cards-container">
+                <div class="info-card">
+                    <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+                    <h3>البريد الإلكتروني</h3>
+                    <p>mohamadinocraft12@gmail.com</p>
                 </div>
-                <button type="submit" class="btn-submit">إرسال الرسالة <i class="fa-solid fa-paper-plane"></i></button>
-            </form>
+
+                <!-- كرت GitHub القابل للضغط واللمس بشكل خاص -->
+                <a href="https://github.com/mhamad7dev" target="_blank" rel="noopener noreferrer" class="info-card github-clickable-card">
+                    <div class="icon-box"><i class="fa-brands fa-github"></i></div>
+                    <h3>حساب GitHub</h3>
+                    <p>github.com/mhamad7dev</p>
+                </a>
+
+                <div class="info-card">
+                    <div class="icon-box"><i class="fa-solid fa-code"></i></div>
+                    <h3>مجال العمل</h3>
+                    <p>Web Developer & Backend Enthusiast</p>
+                </div>
+            </div>
         </section>
     </main>
 
+    <!-- الفوتر -->
     <footer>
         <div class="footer-content">
             <a href="index.html" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> العودة للرئيسية</a>
@@ -60,6 +107,7 @@
             <p class="copyright">© 2026 جميع الحقوق محفوظة | تم تطوير الموقع من قبل <strong>Mhamad Adil</strong></p>
         </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

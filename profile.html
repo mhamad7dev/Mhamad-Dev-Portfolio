@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- شاشة التحميل -->
     <div id="loader">
         <div class="spinner-box">
             <div class="circle-border"><div class="circle-core"></div></div>
@@ -16,6 +17,7 @@
         </div>
     </div>
 
+    <!-- شريط التنقل العلوي -->
     <nav class="navbar">
         <div class="logo">Mhamad <span>Adil</span></div>
         <ul class="nav-links">
@@ -32,10 +34,20 @@
         </ul>
     </nav>
 
+    <!-- محتوى الملف الشخصي بالعرض -->
     <main>
         <section class="section-container">
-            <h2 class="section-title">الملف الشخصي</h2>
-            <div class="glass-card profile-card">
+            <div class="section-header">
+                <span class="sub-badge">DEVELOPER PROFILE</span>
+                <h2 class="section-title">الملف الشخصي</h2>
+                <p class="section-desc">تعرف على هويتي التقنية، خلفيتي البرمجية، وإحصائيات مشاريعي.</p>
+            </div>
+
+            <!-- الكرت العرضي الفخم -->
+            <div class="profile-card-horizontal">
+                <div class="profile-glow-bg"></div>
+                
+                <!-- صورة البروفايل وزر التعديل (مرتبطة بالـ JavaScript) -->
                 <div class="profile-img-container">
                     <img src="bo 3del image.jpeg" id="user-avatar" alt="الصورة الشخصية">
                     <label for="avatar-upload" id="avatar-edit-label" class="avatar-edit-btn" style="display: none;">
@@ -43,23 +55,42 @@
                     </label>
                     <input type="file" id="avatar-upload" accept="image/*" style="display:none;">
                 </div>
-                <h3 class="profile-name">Bo3Dil</h3>
-                <p class="profile-role">Full Stack Developer &amp; Creative Designer</p>
-                
-                <div class="profile-stats">
-                    <div class="stat">
-                        <span id="stat-count">0</span>
-                        <span>مشاريع</span>
+
+                <!-- معلومات المطور وتفاصيله -->
+                <div class="profile-info-side">
+                    <h3 class="profile-name">Mhamad Adil <span class="username-tag">(Bo3Dil)</span></h3>
+                    <p class="profile-role"><i class="fa-solid fa-laptop-code"></i> Full Stack Developer & Node.js Enthusiast</p>
+                    
+                    <p class="profile-bio">
+                        مطور ويب شغوف بتطوير واجهات مستخدم جذابة وتجارب رقمية متكاملة. أعمل باستمرار على توسيع مهاراتي في تطوير الخلفيات باستخدام Node.js و Express.js لبناء تطبيقات قوية وآمنة.
+                    </p>
+
+                    <!-- شريط المهارات والتقنيات -->
+                    <div class="profile-skills-tags">
+                        <span>HTML5 / CSS3</span>
+                        <span>JavaScript</span>
+                        <span>Node.js</span>
+                        <span>Express.js</span>
+                        <span>Next.js</span>
+                        <span>Git & GitHub</span>
                     </div>
-                    <!-- رابط الجيت هب مع الأيقونة وفتح في صفحة جديدة -->
-                    <a class="git-link" href="https://github.com/m73del" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-github"></i> GitHub
-                    </a>
+
+                    <!-- الإحصائيات ورابط GitHub -->
+                    <div class="profile-stats-box">
+                        <div class="stat">
+                            <span id="stat-count">0</span>
+                            <span>مشاريع منشورة</span>
+                        </div>
+                        <a class="git-link" href="https://github.com/mhamad7dev" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-github"></i> حساب GitHub
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- الفوتر -->
     <footer>
         <div class="footer-content">
             <a href="index.html" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> العودة للرئيسية</a>
@@ -67,6 +98,7 @@
             <p class="copyright">© 2026 جميع الحقوق محفوظة | تم تطوير الموقع من قبل <strong>Mhamad Adil</strong></p>
         </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- شاشة التحميل (خاصة بالـ JS) -->
     <div id="loader">
         <div class="spinner-box">
             <div class="circle-border"><div class="circle-core"></div></div>
@@ -16,6 +17,7 @@
         </div>
     </div>
 
+    <!-- شريط التنقل العلوي -->
     <nav class="navbar">
         <div class="logo">Mhamad <span>Adil</span></div>
         <ul class="nav-links">
@@ -33,6 +35,7 @@
     </nav>
 
     <main>
+        <!-- قسم إضافة مشروع جديد -->
         <section id="add-project" class="section-container">
             <h2 class="section-title">إضافة مشروع جديد للمعرض</h2>
             <form id="project-form" class="glass-card">
@@ -51,27 +54,29 @@
                 <div class="form-group">
                     <label for="project-image"><i class="fa-solid fa-image"></i> رفع صورة المشروع</label>
                     <input type="file" id="project-image" class="custom-file-input" accept="image/*" required>
-                    
                 </div>
                 <button type="submit" class="btn-submit"><i class="fa-solid fa-paper-plane"></i> نشر المشروع</button>
             </form>
         </section>
 
+        <!-- قسم عرض معرض المشاريع -->
         <section class="section-container">
             <h2 class="section-title">معرض المشاريع</h2>
             <div id="projects-grid" class="projects-grid"></div>
         </section>
     </main>
 
+    <!-- Modal عرض وتعديل الكود البرمجي -->
     <div id="code-modal" class="modal">
         <div class="modal-content glass-card code-modal-content">
             <span class="close-code-modal">&times;</span>
             <h3 id="code-modal-title">كود المشروع</h3>
             <textarea id="modal-code-editor" rows="12"></textarea>
-            <button id="save-code-btn" class="btn-submit" style="margin-top: 10px;">حفظ التعديلات</button>
+            <button id="save-code-btn" class="btn-submit">حفظ التعديلات</button>
         </div>
-    </footer>
+    </div>
 
+    <!-- الفوتر -->
     <footer>
         <div class="footer-content">
             <a href="index.html" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> العودة للرئيسية</a>
@@ -79,6 +84,7 @@
             <p class="copyright">© 2026 جميع الحقوق محفوظة | تم تطوير الموقع من قبل <strong>Mhamad Adil</strong></p>
         </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

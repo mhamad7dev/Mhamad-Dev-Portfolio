@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mhamad Adil - الرئيسية</title>
+    <title>Mhamad Adil - Full Stack Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- شاشة التحميل (JavaScript) -->
     <div id="loader">
         <div class="spinner-box">
             <div class="circle-border"><div class="circle-core"></div></div>
@@ -16,6 +17,7 @@
         </div>
     </div>
 
+    <!-- شريط التنقل العلوي (Navbar) -->
     <nav class="navbar">
         <div class="logo">Mhamad <span>Adil</span></div>
         <ul class="nav-links">
@@ -25,23 +27,43 @@
             <li><a href="contact.html">التواصل معي</a></li>
             <li><a href="login.html" class="login-btn"><i class="fa-solid fa-user-lock"></i> تسجيل الدخول</a></li>
             <li>
-                <button id="theme-toggle" class="theme-toggle-btn" title="تغيير المظهر">
+                <button id="theme-toggle" class="theme-toggle-btn" title="تغيير المظهر" aria-label="تغيير المظهر">
                     <i class="fa-solid fa-moon"></i>
                 </button>
             </li>
         </ul>
     </nav>
 
+    <!-- الواجهة الرئيسية (Hero Section) المحدث -->
     <main>
         <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="glitch-text">مرحباً بك، أنا <span class="highlight">Mhamad Adil</span></h1>
-                <p class="hero-desc">مطور مواقع ويب شغوف بتصميم وتطوير تجارب رقمية ممتازة وعصرية. أهلاً بك في معرض الأعمال الخاص بي  !</p>
-                <a href="projects.html#add-project" class="btn-primary"><i class="fa-solid fa-plus-circle"></i> إضافة مشروع جديد</a>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="welcome-badge">
+                        <i class="fa-solid fa-code"></i> مرحباً بك في عالمي البرمجي
+                    </div>
+                    <h1 class="glitch-text">أنا <span class="highlight">Mhamad Adil</span></h1>
+                    <h2 class="hero-subtitle">Full Stack & Web Developer</h2>
+                    <p class="hero-desc">
+                        أبني تجارب رقمية عصرية وواجهات مستخدم جذابة، وأطور خلفيات قوية باستخدام Node.js. رحلتي في عالم البرمجة مليئة بالشغف، الابتكار، وتحويل الأفكار المعقدة إلى مشاريع رقمية مبهرة.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="projects.html" class="btn-primary"><i class="fa-solid fa-laptop-code"></i> استعرض مشاريعي</a>
+                        <a href="projects.html#add-project" class="btn-secondary"><i class="fa-solid fa-plus-circle"></i> إضافة مشروع جديد</a>
+                    </div>
+                </div>
+
+                <div class="hero-image-wrapper">
+                    <div class="profile-img-container">
+                        <!-- ضع صورة صاحب الموقع باسم profile.jpg بجانب index.html -->
+                        <img src="Mhamad_Dev 2 photo.jpeg" alt="صورة Mhamad Adil الشخصية" class="hero-profile-pic">
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
+    <!-- الفوتر (Footer) -->
     <footer>
         <div class="footer-content">
             <a href="index.html" class="back-to-top"><i class="fa-solid fa-arrow-up"></i> العودة للرئيسية</a>
@@ -49,6 +71,7 @@
             <p class="copyright">© 2026 جميع الحقوق محفوظة | تم تطوير الموقع من قبل <strong>Mhamad Adil</strong></p>
         </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
