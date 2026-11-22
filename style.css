@@ -691,6 +691,119 @@ footer {
    10. التجاوب التام مع الجوال والآيباد 
    ========================================== */
 
+/* iPad portrait and landscape (768px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .navbar {
+    padding-inline: 3%;
+  }
+
+  .nav-links {
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .nav-links a {
+    padding-inline: 9px;
+    font-size: 0.84rem;
+  }
+
+  .hero-section {
+    min-height: auto;
+    padding-block: 64px;
+  }
+
+  .hero-container {
+    gap: 28px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.35rem, 5vw, 3.25rem);
+  }
+
+  .hero-desc {
+    line-height: 1.85;
+  }
+
+  .profile-img-container,
+  .profile-img-container-hero {
+    width: clamp(220px, 28vw, 280px);
+    height: clamp(220px, 28vw, 280px);
+    flex-basis: clamp(220px, 28vw, 280px);
+  }
+
+  .section-container {
+    padding-inline: 28px;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-img {
+    height: 210px;
+  }
+
+  .contact-cards-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .profile-stats-box {
+    flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 1024px) and (orientation: portrait) {
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .logo {
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-container {
+    flex-direction: column-reverse;
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 680px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-image-wrapper {
+    width: 100%;
+  }
+
+  .hero-desc {
+    margin-inline: auto;
+  }
+
+  .profile-card-horizontal {
+    flex-direction: column;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .contact-grid { 
     grid-template-columns: 1fr !important; 
@@ -1295,6 +1408,10 @@ footer {
   }
 
   .nav-links a {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 7px 10px;
     font-size: 0.88rem;
   }
